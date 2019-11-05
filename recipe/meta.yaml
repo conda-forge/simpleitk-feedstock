@@ -1,7 +1,7 @@
 {% set name = "simpleitk" %}
 {% set version = "1.2.3" %}
 {% set sha256 = "718980ebf9b704ea145c6764f0745da9c8794442d36cd01292a72683946c5e53" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 
 package:
