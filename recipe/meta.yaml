@@ -25,6 +25,7 @@ requirements:
     - python
     - libitk
     - libsimpleitk ={{ version }}
+    - fftw
     
   run:
     - vs2015_runtime  # [win]
