@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/SimpleITK/SimpleITK/releases/download/v{{version}}/SimpleITK-{{version}}.tar.gz
+  url: https://github.com/SimpleITK/SimpleITK/releases/download/v{{ version }}/SimpleITK-{{ version }}.tar.gz
   sha256: 1d67ed4324fee0d7341a027de865bf915a34dfa82e2863d89037e2f2865f7559
 
 build:
-    number: 1
+    number: 2
     skip: true  # [ win and py27 ]
 
 requirements:
