@@ -36,4 +36,4 @@ if errorlevel 1 (
 
 REM Package step
 cd SimpleITK-build\Wrapping\Python
-%PYTHON% Packaging\setup.py install
+%PYTHON% setup.py install
