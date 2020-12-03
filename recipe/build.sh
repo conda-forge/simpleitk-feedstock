@@ -33,4 +33,4 @@ cmake \
     "${SRC_DIR}"/Wrapping/Python
 
 cmake --build . --config Release
-${PYTHON} Packaging/setup.py install
+${PYTHON} setup.py install
