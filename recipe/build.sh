@@ -5,8 +5,8 @@ BUILD_DIR=${SRC_DIR}/build
 mkdir ${BUILD_DIR}
 cd ${BUILD_DIR}
 
-PYTHON_INCLUDE_DIR=$(${PYTHON} -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
-PYTHON_LIBRARY=$(${PYTHON} -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
+#PYTHON_INCLUDE_DIR=$(${PYTHON} -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
+#PYTHON_LIBRARY=$(${PYTHON} -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
 
 cmake \
     -G Ninja \
@@ -28,8 +28,8 @@ cmake \
     -D BUILD_TESTING:BOOL=OFF \
     -D SimpleITK_PYTHON_USE_VIRTUALENV:BOOL=OFF \
     -D "PYTHON_EXECUTABLE:FILEPATH=${PYTHON}" \
-    -D "PYTHON_INCLUDE_DIR:PATH=${PYTHON_INCLUDE_DIR}" \
-    -D "PYTHON_LIBRARY:PATH=${PYTHON_LIBRARY_DIR}" \
+#    -D "PYTHON_INCLUDE_DIR:PATH=${PYTHON_INCLUDE_DIR}" \
+#    -D "PYTHON_LIBRARY:PATH=${PYTHON_LIBRARY_DIR}" \
     "${SRC_DIR}"/Wrapping/Python
 
 cmake --build . --config Release
