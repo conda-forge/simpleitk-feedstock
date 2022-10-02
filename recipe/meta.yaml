@@ -1,5 +1,5 @@
 {% set name = "simpleitk" %}
-{% set version = "2.1.0" %}
+{% set version = "2.1.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,10 @@ package:
 
 source:
   url: https://github.com/SimpleITK/SimpleITK/releases/download/v{{ version }}/SimpleITK-{{ version }}.tar.gz
-  sha256: a551636e5d33dff88818bdb2fdaba190184b225d0eee015bfa2ce3a4fb6bdb24
+  sha256: 9edc56b81a9f295081da2f6cafce4f7f5f3b4cfc6b8cb33365e68b581daea1d2
 
 build:
-  number: 1
-  skip: true  # [ win and py27]
+  number: 0
 
 requirements:
   build:
@@ -23,7 +22,7 @@ requirements:
 
   host:
     - python
-    - libitk
+    - libitk-devel
     - libsimpleitk ={{ version }}
     - fftw
 
@@ -37,7 +36,7 @@ test:
     - SimpleITK
 
 about:
-  home: http::/www.simpleitk.org
+  home: http://www.simpleitk.org
   license: Apache-2.0
   license_file: LICENSE
   summary: Simplified interface to the Insight Toolkit for image registration and segmentation
