@@ -11,8 +11,8 @@ if [[ "$target_platform" != "$build_platform" ]]; then
 else
     PYTHON_EXECUTABLE="${PYTHON}"
 fi
-PYTHON_INCLUDE_DIR=$(${PYTHON_EXECUTABLE} -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
-PYTHON_LIBRARY_DIR=$(${PYTHON_EXECUTABLE} -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
+# PYTHON_INCLUDE_DIR=$(${PYTHON_EXECUTABLE} -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
+# PYTHON_LIBRARY_DIR=$(${PYTHON_EXECUTABLE} -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
 
 cmake ${CMAKE_ARGS} \
     -G Ninja \
@@ -34,9 +34,9 @@ cmake ${CMAKE_ARGS} \
     -D BUILD_TESTING:BOOL=OFF \
     -D SimpleITK_PYTHON_USE_VIRTUALENV:BOOL=OFF \
     -D "PYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}" \
-    -D "PYTHON_INCLUDE_DIR:PATH=${PYTHON_INCLUDE_DIR}" \
-    -D "PYTHON_LIBRARY:PATH=${PYTHON_LIBRARY_DIR}" \
     "${SRC_DIR}"/Wrapping/Python
 
+    # -D "PYTHON_INCLUDE_DIR:PATH=${PYTHON_INCLUDE_DIR}" \
+    # -D "PYTHON_LIBRARY:PATH=${PYTHON_LIBRARY_DIR}" \
 cmake --build . --config Release
 ${PYTHON} setup.py install
