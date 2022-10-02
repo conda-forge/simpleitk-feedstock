@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/SimpleITK/SimpleITK/releases/download/v{{ version }}/SimpleITK-{{ version }}.tar.gz
   sha256: a551636e5d33dff88818bdb2fdaba190184b225d0eee015bfa2ce3a4fb6bdb24
+  patches:                 # [build_platform != target_platform]
+    - version_setup.patch  # [build_platform != target_platform]
 
 build:
   number: 1
@@ -25,12 +27,14 @@ requirements:
 
   host:
     - python
+    - libitk
     - libitk-devel
     - libsimpleitk ={{ version }}
     - fftw
 
   run:
     - vs2015_runtime  # [win]
+    - {{ pin_compatible('libitk', exact=True) }}
     - {{ pin_compatible('libitk-devel', exact=True) }}
     - python
 
