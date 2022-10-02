@@ -1,7 +1,7 @@
 @echo on
-set BUILD_DIR=%SRC_DIR%\b
-mkdir %BUILD_DIR%
-cd %BUILD_DIR%
+set "BUILD_DIR=%SRC_DIR%\b"
+mkdir "%BUILD_DIR%"
+cd "%BUILD_DIR%"
 
 echo "%SRC_DIR%"
 
@@ -35,5 +35,4 @@ if errorlevel 1 (
 )
 
 REM Package step
-cd SimpleITK-build\Wrapping\Python
-%PYTHON% setup.py install
+"%PYTHON%" setup.py install
