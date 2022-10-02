@@ -12,7 +12,7 @@ source:
     - version_setup.patch  # [build_platform != target_platform]
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
