@@ -1,9 +1,10 @@
 #!/bin/bash
+set -euxo pipefail
 
-BUILD_DIR=${SRC_DIR}/build
+BUILD_DIR="${SRC_DIR}/build"
 
-mkdir ${BUILD_DIR}
-cd ${BUILD_DIR}
+mkdir "${BUILD_DIR}"
+cd "${BUILD_DIR}"
 
 if [[ "$target_platform" != "$build_platform" ]]; then
     PYTHON_EXECUTABLE="${BUILD_PREFIX}/bin/python"
@@ -32,7 +33,7 @@ cmake ${CMAKE_ARGS} \
     -D BUILD_SHARED_LIBS:BOOL=OFF \
     -D BUILD_TESTING:BOOL=OFF \
     -D SimpleITK_PYTHON_USE_VIRTUALENV:BOOL=OFF \
-    -D "PYTHON_EXECUTABLE:FILEPATH=${PYTHON}" \
+    -D "PYTHON_EXECUTABLE:FILEPATH=${PYTHON_EXECUTABLE}" \
     -D "PYTHON_INCLUDE_DIR:PATH=${PYTHON_INCLUDE_DIR}" \
     -D "PYTHON_LIBRARY:PATH=${PYTHON_LIBRARY_DIR}" \
     "${SRC_DIR}"/Wrapping/Python
