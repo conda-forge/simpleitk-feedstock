@@ -6,12 +6,12 @@ mkdir ${BUILD_DIR}
 cd ${BUILD_DIR}
 
 if [[ "$target_platform" != "$build_platform" ]]; then
-    PYTHON_INCLUDE_DIR=$(${BUILD_PREFIX}/bin/python -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
-    PYTHON_LIBRARY=$(${BUILD_PREFIX}/bin/python -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
+    PYTHON_EXECUTABLE="${BUILD_PREFIX}/bin/python"
 else
-    PYTHON_INCLUDE_DIR=$(${PYTHON} -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
-    PYTHON_LIBRARY=$(${PYTHON} -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
+    PYTHON_EXECUTABLE="${PYTHON}"
 fi
+PYTHON_INCLUDE_DIR=$(${PYTHON_EXECUTABLE} -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
+PYTHON_LIBRARY=$(${PYTHON_EXECUTABLE} -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
 
 cmake ${CMAKE_ARGS} \
     -G Ninja \
