@@ -1,0 +1,12 @@
+--- CMake/sitkTargetLinkLibrariesWithDynamicLookup.cmake	2022-10-02 22:50:02.000000000 +0200
++++ CMake/sitkTargetLinkLibrariesWithDynamicLookup.cmake	2022-10-02 22:49:51.000000000 +0200
+@@ -405,6 +405,9 @@
+     if(project_works EQUAL 0)
+       set(project_works TRUE)
+       message(STATUS "Performing Test ${test_description} - Success")
++    elseif (CMAKE_CROSSCOMPILING AND APPLE AND "${link_flag_spec}" STREQUAL "osx_dynamic_lookup")
++      set(project_works TRUE)
++      message(STATUS "Performing Test ${test_description} - Cross compiling: assume success")
+     else()
+       set(project_works FALSE)
+       message(STATUS "Performing Test ${test_description} - Failed")
