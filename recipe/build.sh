@@ -8,7 +8,7 @@ cd ${BUILD_DIR}
 PYTHON_INCLUDE_DIR=$(${PYTHON} -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
 PYTHON_LIBRARY=$(${PYTHON} -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
 
-cmake \
+cmake ${CMAKE_ARGS} \
     -G Ninja \
     -D "CMAKE_CXX_FLAGS:STRING=-fvisibility=hidden -fvisibility-inlines-hidden ${CXXFLAGS}" \
     -D "CMAKE_C_FLAGS:STRING=-fvisibility=hidden ${CFLAGS}" \
