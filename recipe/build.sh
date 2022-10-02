@@ -12,7 +12,7 @@ else
     PYTHON_EXECUTABLE="${PYTHON}"
 fi
 PYTHON_INCLUDE_DIR=$(${PYTHON_EXECUTABLE} -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
-PYTHON_LIBRARY=$(${PYTHON_EXECUTABLE} -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
+PYTHON_LIBRARY_DIR=$(${PYTHON_EXECUTABLE} -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
 
 cmake ${CMAKE_ARGS} \
     -G Ninja \
