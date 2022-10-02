@@ -6,7 +6,7 @@ mkdir ${BUILD_DIR}
 cd ${BUILD_DIR}
 
 if [[ "$target_platform" != "$build_platform" ]]; then
-    PYTHON_INCLUDE_DIR=$(${BUILD_PREFIX}/bin/python-c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
+    PYTHON_INCLUDE_DIR=$(${BUILD_PREFIX}/bin/python -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
     PYTHON_LIBRARY=$(${BUILD_PREFIX}/bin/python -c 'import sysconfig;print("{0}/{1}".format(*map(sysconfig.get_config_var, ("LIBDIR", "LDLIBRARY"))))')
 else
     PYTHON_INCLUDE_DIR=$(${PYTHON} -c 'import sysconfig;print("{0}".format(sysconfig.get_path("platinclude")))')
