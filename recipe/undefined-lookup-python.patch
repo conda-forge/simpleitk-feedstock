@@ -1,0 +1,12 @@
+--- Wrapping/Python/CMakeLists.txt	2022-10-03 01:44:24.000000000 +0200
++++ Wrapping/Python/CMakeLists.txt	2022-10-03 01:32:06.000000000 +0200
+@@ -48,7 +48,8 @@
+     PRIVATE
+     $<$<CONFIG:Debug>:SWIG_PYTHON_INTERPRETER_NO_DEBUG>)
+ endif()
+-sitk_target_link_libraries_with_dynamic_lookup( ${SWIG_MODULE_SimpleITKPython_TARGET_NAME} ${PYTHON_LIBRARIES} )
++# sitk_target_link_libraries_with_dynamic_lookup( ${SWIG_MODULE_SimpleITKPython_TARGET_NAME} ${PYTHON_LIBRARIES})
++set_target_properties( ${SWIG_MODULE_SimpleITKPython_TARGET_NAME} PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" )
+ 
+ target_include_directories( ${SWIG_MODULE_SimpleITKPython_TARGET_NAME}
+   PRIVATE
