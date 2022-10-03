@@ -6,4 +6,4 @@ github:
   tooling_branch_name: main
 test: native_and_emulated
 azure:
-  store_build_artifacts: true
+  store_build_artifacts: false
