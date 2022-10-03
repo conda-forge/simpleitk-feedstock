@@ -10,6 +10,7 @@ source:
   sha256: 9edc56b81a9f295081da2f6cafce4f7f5f3b4cfc6b8cb33365e68b581daea1d2
   patches:                 # [build_platform != target_platform]
     - version_setup.patch  # [build_platform != target_platform]
+    # see https://github.com/conda-forge/simpleitk-feedstock/pull/27#issuecomment-1264707645
     - undefined-lookup-python.patch  # [(build_platform != target_platform) and osx]
 
 build:

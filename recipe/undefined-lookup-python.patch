@@ -1,3 +1,8 @@
+See https://github.com/conda-forge/simpleitk-feedstock/pull/27#issuecomment-1264707645
+and successive comments and commits for full explanation. Without this patch, cross-compiled
+`_SimpleITK.so` on MacOS makes the interpreter segfault because libpython.so gets linked.
+The solution is to remove the link and force inject the "-undefined dynamic_lookup" flag
+so it resolves at runtime.
 --- Wrapping/Python/CMakeLists.txt	2022-10-03 01:44:24.000000000 +0200
 +++ Wrapping/Python/CMakeLists.txt	2022-10-03 01:32:06.000000000 +0200
 @@ -48,7 +48,8 @@
