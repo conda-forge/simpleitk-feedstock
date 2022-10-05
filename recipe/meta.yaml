@@ -1,5 +1,5 @@
 {% set name = "simpleitk" %}
-{% set version = "2.1.1" %}
+{% set version = "2.1.1.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,19 @@ package:
 
 source:
   url: https://github.com/SimpleITK/SimpleITK/releases/download/v{{ version }}/SimpleITK-{{ version }}.tar.gz
-  sha256: 9edc56b81a9f295081da2f6cafce4f7f5f3b4cfc6b8cb33365e68b581daea1d2
+  sha256: f52f8906bc5350e1ea8e7b163ef9242ca7e52de5c53c51793ea7539c42014748
+  patches:                 # [build_platform != target_platform]
+    - version_setup.patch  # [build_platform != target_platform]
+    # see https://github.com/conda-forge/simpleitk-feedstock/pull/27#issuecomment-1264707645
+    - undefined-lookup-python.patch  # [(build_platform != target_platform) and osx]
 
 build:
   number: 0
 
 requirements:
   build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cmake   >=3.15
     - ninja
     - swig    4.0.*
@@ -22,12 +28,14 @@ requirements:
 
   host:
     - python
+    - libitk
     - libitk-devel
     - libsimpleitk ={{ version }}
     - fftw
 
   run:
     - vs2015_runtime  # [win]
+    - {{ pin_compatible('libitk', exact=True) }}
     - {{ pin_compatible('libitk-devel', exact=True) }}
     - python
 

@@ -1,0 +1,14 @@
+Do not import SimpleITK in setup.py when cross-compiling. It will fail due
+to the library being another arch. Instead, get the version from the env var
+set by conda-build.
+--- Wrapping/Python/Packaging/setup.py.in	2022-10-02 18:32:22.000000000 +0200
++++ Wrapping/Python/Packaging/setup.py.in	2022-10-02 18:33:33.000000000 +0200
+@@ -11,7 +11,7 @@
+ import re
+ import os.path as osp
+ 
+-from SimpleITK._version import __version__
++__version__ = os.environ.get('PKG_VERSION', '<unknown>')
+ 
+ def to_package_relpath(filename, pkg_name='SimpleITK'):
+     return osp.relpath(filename, osp.join(os.curdir, pkg_name))
