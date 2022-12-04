@@ -14,6 +14,8 @@ cxx_compiler_version:
 - '14'
 fftw:
 - '3'
+libitk:
+- '5.2'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 pin_run_as_build:
