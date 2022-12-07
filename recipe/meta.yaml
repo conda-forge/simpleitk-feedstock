@@ -28,15 +28,12 @@ requirements:
 
   host:
     - python
-    - libitk
-    - libitk-devel
     - libsimpleitk ={{ version }}
     - fftw
 
   run:
     - vs2015_runtime  # [win]
     - {{ pin_compatible('libitk', exact=True) }}
-    - {{ pin_compatible('libitk-devel', exact=True) }}
     - python
 
 test:
