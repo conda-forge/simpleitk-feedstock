@@ -10,7 +10,6 @@ source:
   url: https://github.com/SimpleITK/SimpleITK/releases/download/v{{ version }}/SimpleITK-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:                 # [build_platform != target_platform]
-    - version_setup.patch  # [build_platform != target_platform]
     # see https://github.com/conda-forge/simpleitk-feedstock/pull/27#issuecomment-1264707645
     - undefined-lookup-python.patch  # [(build_platform != target_platform) and osx]
 
