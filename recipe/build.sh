@@ -17,4 +17,4 @@ cmake ${CMAKE_ARGS} \
     "${SRC_DIR}"/Wrapping/Python
 
 cmake --build . --config Release
-"${PYTHON}" setup.py install
+"${PYTHON}" -m pip install .

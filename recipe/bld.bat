@@ -35,4 +35,4 @@ if errorlevel 1 (
 )
 
 REM Package step
-"%PYTHON%" setup.py install
+"%PYTHON%" -m pip install .
