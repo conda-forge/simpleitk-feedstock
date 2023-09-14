@@ -3,15 +3,16 @@ and successive comments and commits for full explanation. Without this patch, cr
 `_SimpleITK.so` on MacOS makes the interpreter segfault because libpython.so gets linked.
 The solution is to remove the link and force inject the "-undefined dynamic_lookup" flag
 so it resolves at runtime.
---- Wrapping/Python/CMakeLists.txt	2022-10-03 01:44:24.000000000 +0200
-+++ Wrapping/Python/CMakeLists.txt	2022-10-03 01:32:06.000000000 +0200
-@@ -48,7 +48,8 @@
+--- a/Wrapping/Python/CMakeLists.txt
++++ b/Wrapping/Python/CMakeLists.txt
+@@ -47,7 +47,8 @@ if(NOT Python_DEBUG_LIBRARY AND MSVC)
      PRIVATE
      $<$<CONFIG:Debug>:SWIG_PYTHON_INTERPRETER_NO_DEBUG>)
  endif()
--sitk_target_link_libraries_with_dynamic_lookup( ${SWIG_MODULE_SimpleITKPython_TARGET_NAME} ${PYTHON_LIBRARIES} )
-+# sitk_target_link_libraries_with_dynamic_lookup( ${SWIG_MODULE_SimpleITKPython_TARGET_NAME} ${PYTHON_LIBRARIES})
+-sitk_target_link_libraries_with_dynamic_lookup( ${SWIG_MODULE_SimpleITKPython_TARGET_NAME} Python::Module )
++# sitk_target_link_libraries_with_dynamic_lookup( ${SWIG_MODULE_SimpleITKPython_TARGET_NAME} Python::Module )
 +set_target_properties( ${SWIG_MODULE_SimpleITKPython_TARGET_NAME} PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" )
  
  target_include_directories( ${SWIG_MODULE_SimpleITKPython_TARGET_NAME}
    PRIVATE
+
