@@ -17,9 +17,7 @@ cmake -G "Ninja" ^
     -D BUILD_TESTING:BOOL=OFF ^
     -D SimpleITK_BUILD_DISTRIBUTE:BOOL=ON ^
     -D SimpleITK_PYTHON_USE_VIRTUALENV:BOOL=OFF ^
-    -D "PYTHON_EXECUTABLE:FILEPATH=%PYTHON%" ^
-    -D "PYTHON_INCLUDE_DIR:PATH=%PREFIX%/include" ^
-    -D "PYTHON_LIBRARY:FILEPATH=%PREFIX%/libs/python%MY_PY_VER%.lib" ^
+    -D "Python_EXECUTABLE:FILEPATH=%PYTHON%" ^
     "%SRC_DIR%/Wrapping/Python"
 
 if errorlevel 1 (
