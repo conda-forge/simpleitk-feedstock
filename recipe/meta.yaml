@@ -1,6 +1,6 @@
 {% set name = "simpleitk" %}
-{% set version = "2.3.1" %}
-{% set sha256 = "7498c1bd3ae8218027c17bcefd2346b16eda6f2a009c0b9f344bd163c4715870" %}
+{% set version = "2.4.0" %}
+{% set sha256 = "bcf9e3b7f944b049728a72ca99d122d3849802626bc41e8ba14b5498cd218df5" %}
 
 package:
   name: {{ name|lower }}
@@ -9,12 +9,12 @@ package:
 source:
   url: https://github.com/SimpleITK/SimpleITK/releases/download/v{{ version }}/SimpleITK-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:                 # [build_platform != target_platform]
+  patches:   # [build_platform != target_platform]
     # see https://github.com/conda-forge/simpleitk-feedstock/pull/27#issuecomment-1264707645
     - undefined-lookup-python.patch  # [(build_platform != target_platform) and osx]
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
@@ -24,6 +24,7 @@ requirements:
     - ninja
     - swig    4.0.*
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
 
 
