@@ -26,6 +26,7 @@ requirements:
   host:
     - python
     - pip
+    - setuptools                             # [py >= 313]
     - libsimpleitk ={{ version }}
     - libitk-devel
 
