@@ -1,4 +1,4 @@
-{% set version = "2.5.0" %}
+{% set version = "2.5.2" %}
 
 package:
   name: simpleitk
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/SimpleITK/SimpleITK/releases/download/v{{ version }}/SimpleITK-{{ version }}.tar.gz
-  sha256: 18de80b282aea3f1cf1e7816da1180ff3603c6e37eacda110e3cc0093fd54901
+  sha256: 8a71d4a80ea40e543e3168bda6a4442d921c4dd089468a4c69f3d00a78c60fb4
 
 build:
   number: 0
