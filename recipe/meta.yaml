@@ -25,6 +25,7 @@ requirements:
 
   host:
     - python
+    - swig-abi
     - pip
     - setuptools                             # [py >= 313]
     - libsimpleitk ={{ version }}
@@ -36,6 +37,10 @@ requirements:
 test:
   imports:
     - SimpleITK
+  commands:
+    - pip check
+  requires:
+    - pip
 
 about:
   home: http://www.simpleitk.org
