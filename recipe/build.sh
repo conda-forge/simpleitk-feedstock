@@ -14,6 +14,7 @@ cmake ${CMAKE_ARGS} \
     -D BUILD_SHARED_LIBS:BOOL=OFF \
     -D BUILD_TESTING:BOOL=OFF \
     -D SimpleITK_PYTHON_USE_VIRTUALENV:BOOL=OFF \
+    -D SimpleITK_PYTHON_USE_LIMITED_API:BOOL=OFF \
     "${SRC_DIR}"/Wrapping/Python
 
 cmake --build . --config Release
