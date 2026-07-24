@@ -17,6 +17,7 @@ cmake -G "Ninja" ^
     -D BUILD_TESTING:BOOL=OFF ^
     -D SimpleITK_BUILD_DISTRIBUTE:BOOL=ON ^
     -D SimpleITK_PYTHON_USE_VIRTUALENV:BOOL=OFF ^
+    -D SimpleITK_PYTHON_USE_LIMITED_API:BOOL=OFF ^
     -D "Python_EXECUTABLE:FILEPATH=%PYTHON%" ^
     "%SRC_DIR%/Wrapping/Python"
 
