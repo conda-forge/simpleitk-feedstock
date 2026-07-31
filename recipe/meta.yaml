@@ -1,5 +1,9 @@
 {% set version = "2.5.5" %}
 {% set abi3_min = "3.11" %}
+{# libsimpleitk's run_export on libitk is only a loose lower bound (>=5.4.6,<5.5.0a0),
+   so pin libitk-devel here to the exact ITK patch release libsimpleitk was built
+   against; bump this whenever libsimpleitk is rebuilt against a newer ITK. #}
+{% set libitk_devel_version = "5.4.6" %}
 
 package:
   name: simpleitk
@@ -39,7 +43,7 @@ requirements:
     - pip
     - setuptools                             # [py >= 313]
     - libsimpleitk ={{ version }}
-    - libitk-devel
+    - libitk-devel ={{ libitk_devel_version }}
 
   run:
     - python >={{ abi3_min }}                # [is_abi3 and py >= 311]
