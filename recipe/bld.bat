@@ -8,6 +8,10 @@ echo "%SRC_DIR%"
 REM Remove dot from PY_VER for use in library name
 set MY_PY_VER=%PY_VER:.=%
 
+REM python-abi3 is only in host for the abi3 variants; free-threaded CPython makes
+REM Py_LIMITED_API a compile-time error, so the limited API must stay off there.
+set "LIMITED_API=OFF"
+if defined PY_LIMITED_API set "LIMITED_API=ON"
 
 REM Configure Step
 cmake -G "Ninja" ^
@@ -17,6 +21,7 @@ cmake -G "Ninja" ^
     -D BUILD_TESTING:BOOL=OFF ^
     -D SimpleITK_BUILD_DISTRIBUTE:BOOL=ON ^
     -D SimpleITK_PYTHON_USE_VIRTUALENV:BOOL=OFF ^
+    -D SimpleITK_PYTHON_USE_LIMITED_API:BOOL=%LIMITED_API% ^
     -D "Python_EXECUTABLE:FILEPATH=%PYTHON%" ^
     "%SRC_DIR%/Wrapping/Python"
 
