@@ -1,4 +1,9 @@
 {% set version = "2.5.5" %}
+{% set abi3_min = "3.11" %}
+{# libsimpleitk's run_export on libitk is only a loose lower bound (>=5.4.6,<5.5.0a0),
+   so pin libitk-devel here to the exact ITK patch release libsimpleitk was built
+   against; bump this whenever libsimpleitk is rebuilt against a newer ITK. #}
+{% set libitk_devel_version = "5.4.6" %}
 
 package:
   name: simpleitk
@@ -10,12 +15,19 @@ source:
 
 build:
   number: 0
+  # SimpleITK hard-codes Py_LIMITED_API=0x030b0000, so a single stable-ABI build on
+  # 3.11 covers every later GIL python. Python 3.10 is below that floor, and the
+  # free-threaded variants (is_abi3 false) reject the limited API outright; both are
+  # still built per python version.
+  skip: True                                 # [is_abi3 and py > 311]
+  python_version_independent: true           # [is_abi3 and py >= 311]
 
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cmake   >=3.16.3
+    # SimpleITK requires cmake >=3.30 to wrap free-threaded python.
+    - cmake   >=3.30
     - ninja
     - swig    4.3.*
     - {{ compiler('c') }}
@@ -25,22 +37,28 @@ requirements:
 
   host:
     - python
+    # Exports PY_LIMITED_API for the build scripts and adds the cpython lower bound.
+    - python-abi3 =={{ abi3_min }}           # [is_abi3 and py >= 311]
     - swig-abi
     - pip
     - setuptools                             # [py >= 313]
     - libsimpleitk ={{ version }}
-    - libitk-devel
+    - libitk-devel ={{ libitk_devel_version }}
 
   run:
-    - python
+    - python >={{ abi3_min }}                # [is_abi3 and py >= 311]
+    - python                                 # [not (is_abi3 and py >= 311)]
 
 test:
   imports:
     - SimpleITK
   commands:
+    - abi3audit $SP_DIR/SimpleITK/_SimpleITK.abi3.so -s -v --assume-minimum-abi3 {{ abi3_min }}   # [unix and is_abi3 and py >= 311]
+    - abi3audit %SP_DIR%\SimpleITK\_SimpleITK.pyd -s -v --assume-minimum-abi3 {{ abi3_min }}      # [win and is_abi3 and py >= 311]
     - pip check
   requires:
     - pip
+    - abi3audit                              # [is_abi3 and py >= 311]
 
 about:
   home: http://www.simpleitk.org
