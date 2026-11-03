@@ -15,7 +15,7 @@ requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cmake   >=3.16.3
+    - cmake   >=3.30
     - ninja
     - swig    >=4.4.0
     - {{ compiler('c') }}
